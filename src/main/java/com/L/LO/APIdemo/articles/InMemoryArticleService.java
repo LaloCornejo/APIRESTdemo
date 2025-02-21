@@ -24,13 +24,13 @@ public class InMemoryArticleService implements ArticleService {
 
   public Article partialUpdate(Long id, Article article) {
     Article existingArticle = this.findArticleById(id);
-    if(existingArticle == null) {
+    if (existingArticle == null) {
       return null;
     }
-    if(article.getDescription() != null) {
+    if (article.getDescription() != null) {
       existingArticle.setDescription(article.getDescription());
     }
-    if(article.getPrice() != null) {
+    if (article.getPrice() != null) {
       existingArticle.setPrice(article.getPrice());
     }
     return existingArticle;
@@ -38,7 +38,7 @@ public class InMemoryArticleService implements ArticleService {
 
   public Article update(Long id, Article article) {
     Article existingArticle = this.findArticleById(id);
-    if(existingArticle == null) {
+    if (existingArticle == null) {
       return null;
     }
     existingArticle.setDescription(article.getDescription());
@@ -48,15 +48,15 @@ public class InMemoryArticleService implements ArticleService {
 
   public boolean delete(Long id) {
     Article existingArticle = this.findArticleById(id);
-    if(existingArticle == null) {
+    if (existingArticle == null) {
       return false;
     }
     return items.remove(existingArticle);
   }
 
   private Article findArticleById(Long id) {
-    for(Article a : items) {
-      if(a.getId() == id) {
+    for (Article a : items) {
+      if (a.getId().equals(id)) {
         return a;
       }
     }

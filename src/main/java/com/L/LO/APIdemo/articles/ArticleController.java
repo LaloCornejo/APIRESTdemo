@@ -6,14 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ArticleController {
@@ -35,7 +28,7 @@ public class ArticleController {
   @GetMapping("/articles/{id}")
   public ResponseEntity<Article> findOne(@PathVariable Long id) {
     Article article = articleService.findOne(id);
-    if(article == null) {
+    if (article == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<>(article, HttpStatus.OK);
@@ -45,7 +38,7 @@ public class ArticleController {
   public ResponseEntity<Article> partialUpdate(
       @PathVariable Long id, @RequestBody Article article) {
       Article existingArticle = articleService.partialUpdate(id, article);
-      if(existingArticle == null) {
+      if (existingArticle == null) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
       return new ResponseEntity<>(existingArticle, HttpStatus.OK);
@@ -55,7 +48,7 @@ public class ArticleController {
   public ResponseEntity<Article> update(
       @PathVariable Long id, @RequestBody Article article) {
       Article existingArticle = articleService.update(id, article);
-      if(existingArticle == null) {
+      if (existingArticle == null) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
       return new ResponseEntity<>(existingArticle, HttpStatus.OK);
@@ -64,7 +57,7 @@ public class ArticleController {
   @DeleteMapping("/articles/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     boolean deleted = articleService.delete(id);
-    if(!deleted) {
+    if (!deleted) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);

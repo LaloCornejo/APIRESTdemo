@@ -30,7 +30,7 @@ public class JpaArticleService implements ArticleService {
 
   @Override
   public Article partialUpdate(Long id, Article article) {
-    Article existingArticle = articleRepository.findById(id).orElse(null);
+    Article existingArticle = this.findOne(id);
     if (existingArticle == null) {
       return null;
     }
@@ -45,8 +45,13 @@ public class JpaArticleService implements ArticleService {
 
   @Override
   public Article update(Long id, Article article) {
-    article.setId(id);
-    return articleRepository.save(article);
+    Article existingArticle = this.findOne(id);
+    if (existingArticle == null) {
+      return null;
+    }
+    existingArticle.setDescription(article.getDescription());
+    existingArticle.setPrice(article.getPrice());
+    return articleRepository.save(existingArticle);
   }
 
   @Override
